@@ -22,7 +22,7 @@ export const registerController = async (req,res) =>{
         if(!address){
             return res.send({error:'Address is Required'});
         }
-        if(role==null){
+        if(!role){
             return res.send({error:'Role is Required'});
         }
         // check user

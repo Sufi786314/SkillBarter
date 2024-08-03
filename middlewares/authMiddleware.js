@@ -12,6 +12,11 @@ export const requireSignIn = async (req,res,next) =>{
         next()
     } catch (error) {
         console.log(error)
+        res.status(500).send({
+            success:false,
+            message:"error in login",
+            error,
+        });
     }
 }
 
@@ -19,7 +24,7 @@ export const requireSignIn = async (req,res,next) =>{
 // Admin
 export const isAdmin = async (req,res,next) =>{
     try {
-        const user = await userModel.findById(req.user_id)
+        const user = await userModel.findById(req.user._id)
         if (user.role !==1){
             return res.status(401).send({
                 success:false,
@@ -32,7 +37,7 @@ export const isAdmin = async (req,res,next) =>{
     } catch (error) {
         return res.status(401).send({
             success:false,
-            message:`Error in Admin Middleware ${error} ${req.user.role}`,
+            message:`${req.user.email}Error in Admin Middleware ${error} ${req.user.role}`,
 
         })
     }
