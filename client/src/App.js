@@ -11,6 +11,11 @@ import PrivateRoute from './components/Layout/routes/Private.js';
 import ForgotPassword from './pages/Auth/ForgotPassword.js';
 import AdminRoute from './components/Layout/routes/AdminRoute.js';
 import AdminDashboard from './pages/Admin/AdminDashboard.js';
+import CreateStream from './pages/Admin/CreateStream.js';
+import CreatePost from './pages/Admin/CreatePost.js';
+import Users from './pages/Admin/Users';
+import Posts from './user/Posts.js';
+import Profile from './user/Profile.js';
 
 function App() {
   return (
@@ -19,9 +24,14 @@ function App() {
       <Route path='/' element={<HomePage/>} />
       <Route path="/dashboard" element={<PrivateRoute/>}>
       <Route path="user" element={<Dashboard/>}/>
+      <Route path="user/posts" element={<Posts/>}/>
+      <Route path="user/profile" element={<Profile/>}/>
       </Route>
       <Route path="/dashboard" element={<AdminRoute/>}>
       <Route path="admin" element={<AdminDashboard/>}/>
+      <Route path="admin/create-stream" element={<CreateStream/>}/>
+      <Route path="admin/create-post" element={<CreatePost/>}/>
+      <Route path="admin/users" element={<Users/>}/>
       </Route>
       <Route path="/register" element={<Register/>}/>
       <Route path="/forgot-password" element={<ForgotPassword/>}/>
