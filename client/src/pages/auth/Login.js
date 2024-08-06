@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Layout from '../../components/Layout/Layout'
 import {toast} from 'react-toastify'
 import axios from 'axios';
-import {useNavigate} from 'react-router-dom'
+import {useNavigate,useLocation} from 'react-router-dom'
 import { useAuth } from '../../context/auth';
 
 const Login = () => {
@@ -10,6 +10,7 @@ const Login = () => {
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
     const navigate = useNavigate()
+    const location = useLocation()
     // form function
     const handleSubmit = async (e) =>{
         e.preventDefault();
@@ -30,10 +31,10 @@ const Login = () => {
                 })
                 localStorage.setItem('auth',JSON.stringify(res.data));
                 // console.log(localStorage.getItem('auth'))   
-                navigate('/');
+                navigate(location.state||'/'); 
             }
             else{
-                toast.error(res.data.messsage)
+                toast.error(res.data.message)
             }
         }
         catch (error){
@@ -48,12 +49,16 @@ const Login = () => {
             <form onSubmit={handleSubmit}>
     
     <div className="mb-3">
-        <input type="email" className="form-control" id="exampleInputEmail" placeholder='Enter Your Email' value={email} onChange={(e)=>{setEmail(e.target.value)}} required/>
+        <input type="email" className="form-control"  placeholder='Enter Your Email' value={email} onChange={(e)=>{setEmail(e.target.value)}} required/>
     </div>
     <div className="mb-3">
-        <input type="password" className="form-control" id="exampleInputPassword" placeholder='Enter Your Password' value={password} onChange={(e)=>{setPassword(e.target.value)}} required/>
+        <input type="password" className="form-control"  placeholder='Enter Your Password' value={password} onChange={(e)=>{setPassword(e.target.value)}} required/>
     </div>
-    <button type="submit" className="btn btn-primary">Submit</button>
+    <div className='mb-3'>
+        <button type="submit" className="btn btn-primary">   Login      </button>
+    </div>
+    <button className="btn btn-primary" onClick={()=>{navigate("/forgot-password")}}>Forgot Password</button>
+
     </form>
         </div>
     </Layout>

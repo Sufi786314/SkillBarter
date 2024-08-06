@@ -3,6 +3,7 @@ import { NavLink,Link} from 'react-router-dom'
 import { GiEgyptianBird } from "react-icons/gi";
 import { useAuth } from '../../context/auth';
 import { toast } from 'react-toastify';
+
 const Header = () => {
   const [auth,setAuth] =useAuth()
   const handleLogout = ()=>{
@@ -41,8 +42,20 @@ const Header = () => {
           <NavLink to= "/login" className="nav-link">Login</NavLink>
         </li>
           </>
-          ) : (<> <li className="nav-item">
-            <NavLink to= "/login" onClick={handleLogout} className="nav-link">Logout</NavLink>
+          ) : (<>
+          <li className="nav-item dropdown">
+  <NavLink className="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+   {auth?.user?.name}
+  </NavLink>
+  <ul className="dropdown-menu">
+    <li><NavLink to ={`/dashboard/${auth?.user?.role===1?'admin':'user'}`} className="dropdown-item" >Dashboard</NavLink></li>
+    <li><NavLink to= "/login" onClick={handleLogout} className="dropdown-item">Logout</NavLink></li>
+  </ul>
+</li>
+
+          
+           <li className="nav-item">
+            
           </li></>)
         }
         <li className="nav-item">
