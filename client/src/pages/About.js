@@ -4,7 +4,7 @@ import Layout from '../components/Layout/Layout'
 
 const About = () => {
   return (
-    <Layout>
+    <Layout title={'About-Us SB'}>
         <h1>About</h1>
     </Layout>
     
